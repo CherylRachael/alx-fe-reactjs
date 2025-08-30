@@ -6,10 +6,13 @@ import './App.css'
 // Existing component
 import WelcomeMessage from './components/WelcomeMessage'
 
-// New components
+// Previous components
 import Header from './components/Header'
 import MainContent from './components/MainContent'
 import Footer from './components/Footer'
+
+// New component
+import UserProfile from './components/UserProfile'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -32,10 +35,15 @@ function App() {
       {/* Your existing WelcomeMessage component */}
       <WelcomeMessage />
 
-      {/* New components */}
+      {/* Previous components */}
       <Header />
       <MainContent />
       <Footer />
+
+      {/* New UserProfile components */}
+      <UserProfile name="Alice" age="25" bio="Loves hiking and photography" />
+      <UserProfile name="Bob" age="30" bio="Enjoys cooking and travel" />
+      <UserProfile name="Charlie" age="28" bio="Fan of books and movies" />
 
       {/* Counter card */}
       <div className="card">
