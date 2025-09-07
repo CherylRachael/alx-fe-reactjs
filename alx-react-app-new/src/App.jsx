@@ -3,23 +3,20 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-// Existing component
+// Existing components
 import WelcomeMessage from './components/WelcomeMessage'
-
-// Previous components
 import Header from './components/Header'
 import MainContent from './components/MainContent'
 import Footer from './components/Footer'
-
-// New component
 import UserProfile from './components/UserProfile'
+import Counter from './components/Counter'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      {/* Logos section */}
+      {/* Logos */}
       <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -29,30 +26,22 @@ function App() {
         </a>
       </div>
 
-      {/* Vite + React heading */}
       <h1>Vite + React</h1>
 
-      {/* Your existing WelcomeMessage component */}
+      {/* Welcome + Custom Components */}
       <WelcomeMessage />
-
-      {/* Previous components */}
       <Header />
       <MainContent />
+      <UserProfile name="Alice" age="25" bio="Loves hiking and photography" />
+      <Counter />
       <Footer />
 
-      {/* New UserProfile components */}
-      <UserProfile name="Alice" age="25" bio="Loves hiking and photography" />
-      <UserProfile name="Bob" age="30" bio="Enjoys cooking and travel" />
-      <UserProfile name="Charlie" age="28" bio="Fan of books and movies" />
-
-      {/* Counter card */}
+      {/* Default Counter */}
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+        <p>Edit <code>src/App.jsx</code> and save to test HMR</p>
       </div>
 
       <p className="read-the-docs">
