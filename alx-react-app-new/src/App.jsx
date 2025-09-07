@@ -1,6 +1,6 @@
 import './App.css'
 
-// Existing components
+// Components
 import WelcomeMessage from './components/WelcomeMessage'
 import Header from './components/Header'
 import MainContent from './components/MainContent'
