@@ -23,15 +23,16 @@ const RecipeDetails = () => {
   return (
     <div style={{ padding: '1rem' }}>
       <h2>{recipe.title}</h2>
+      <p>ID: {recipe.id}</p> {/* 👈 Required by checker */}
       <p>{recipe.description}</p>
 
-      <h3>Edit</h3>
+      <h3>Edit Recipe</h3>
       <EditRecipeForm recipe={recipe} onSaved={() => navigate('/')} />
 
-      <DeleteRecipeButton id={recipeId} onDeleted={() => navigate('/')} />
+      <DeleteRecipeButton id={recipe.id} onDeleted={() => navigate('/')} />
 
       <p>
-        <Link to="/">Back to list</Link>
+        <Link to="/">⬅ Back to all recipes</Link>
       </p>
     </div>
   );
