@@ -1,18 +1,10 @@
 import { useRecipeStore } from './recipeStore';
 
-const DeleteRecipeButton = ({ id, onDeleted }) => {
-  const deleteRecipe = useRecipeStore((s) => s.deleteRecipe);
-
-  const handleDelete = () => {
-    deleteRecipe(id);
-    if (onDeleted) onDeleted();
-  };
+const DeleteRecipeButton = ({ recipeId }) => {
+  const deleteRecipe = useRecipeStore((state) => state.deleteRecipe);
 
   return (
-    <button
-      onClick={handleDelete}
-      style={{ background: 'red', color: 'white', marginTop: '1rem' }}
-    >
+    <button onClick={() => deleteRecipe(recipeId)}>
       Delete Recipe
     </button>
   );
