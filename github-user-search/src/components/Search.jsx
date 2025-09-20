@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { searchUsers } from "../services/githubService.js";
+import { fetchUserData } from "../services/githubService.js";
 
 function Search() {
   const [username, setUsername] = useState("");
   const [location, setLocation] = useState("");
   const [minRepos, setMinRepos] = useState("");
-  const [results, setResults] = useState([]);
+  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -13,16 +13,14 @@ function Search() {
     e.preventDefault();
     setLoading(true);
     setError("");
-    setResults([]);
-
     try {
-      const users = await searchUsers({ username, location, minRepos });
-      if (users.length > 0) {
-        setResults(users);
-      } else {
+      const data = await fetchUserData(username, location, minRepos);
+      if (data.items.length === 0) {
         setError("Looks like we cant find the user");
+      } else {
+        setUsers(data.items);
       }
-    } catch {
+    } catch (err) {
       setError("Looks like we cant find the user");
     } finally {
       setLoading(false);
@@ -30,60 +28,58 @@ function Search() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto mt-10 p-4">
-      <h1 className="text-2xl font-bold text-center mb-6">GitHub Advanced User Search</h1>
-
-      {/* 🔹 Search Form */}
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+    <div className="p-6 max-w-xl mx-auto">
+      <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="text"
-          placeholder="Username"
+          placeholder="Search by username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          className="p-2 border rounded"
+          className="border rounded p-2 w-full"
         />
         <input
           type="text"
-          placeholder="Location"
+          placeholder="Filter by location"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
-          className="p-2 border rounded"
+          className="border rounded p-2 w-full"
         />
         <input
           type="number"
-          placeholder="Min Repos"
+          placeholder="Minimum repositories"
           value={minRepos}
           onChange={(e) => setMinRepos(e.target.value)}
-          className="p-2 border rounded"
+          className="border rounded p-2 w-full"
         />
         <button
           type="submit"
-          className="col-span-1 md:col-span-3 bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+          className="bg-blue-500 text-white px-4 py-2 rounded"
         >
           Search
         </button>
       </form>
 
-      {/* 🔹 Loading & Errors */}
-      {loading && <p className="text-center">Loading...</p>}
-      {error && <p className="text-center text-red-600">{error}</p>}
+      {loading && <p>Loading...</p>}
+      {error && <p>{error}</p>}
 
-      {/* 🔹 Results */}
-      <div className="grid gap-4">
-        {results.map((user) => (
-          <div key={user.id} className="flex items-center gap-4 p-4 border rounded shadow">
+      <div className="mt-4 space-y-4">
+        {users.map((user) => (
+          <div
+            key={user.id}
+            className="flex items-center space-x-4 border-b pb-2"
+          >
             <img
               src={user.avatar_url}
               alt={user.login}
-              className="w-16 h-16 rounded-full"
+              className="w-12 h-12 rounded-full"
             />
             <div>
-              <h2 className="text-lg font-semibold">{user.login}</h2>
+              <p className="font-bold">{user.login}</p>
               <a
                 href={user.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-600 underline"
+                className="text-blue-600"
               >
                 View Profile
               </a>
