@@ -7,7 +7,6 @@ export const fetchUserData = async (username) => {
     const response = await axios.get(`${API_URL}/${username}`);
     return response.data;
   } catch {
-    // Return null if request fails (e.g., user not found or network error)
     return null;
   }
 };

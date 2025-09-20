@@ -20,10 +20,10 @@ function Search() {
       if (data) {
         setUser(data);
       } else {
-        setError("Looks like we can't find the user.");
+        setError("Looks like we cant find the user");
       }
     } catch {
-      setError("Looks like we can't find the user.");
+      setError("Looks like we cant find the user");
     } finally {
       setLoading(false);
     }
